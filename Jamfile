@@ -8,3 +8,14 @@ Application Tranquility :
 	: be 
 	: Tranquility.rdef
 	;
+
+SEARCH_SOURCE += [ FDirName $(HAIKU_TOP) 3rdparty tranquility renderboy ] ;
+
+Application RenderBoy :
+	RenderView.cpp
+	RenderBoy.cpp
+
+	: be 
+	: RenderBoy.rdef
+	;
+

@@ -7,47 +7,36 @@
 //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#include "Tranquility.h"
+#include "RenderBoy.h"
 #include "BrowserWindow.h"
 #include "Constants.h"
 
 #include <Alert.h>
-//#include <MessageRunner.h>
-#include <OS.h>
-//#include <Path.h>
-//#include <String.h>
 
 
-Tranquility::Tranquility()
-	: BApplication(kBrowserAppSignature)
+RenderBoy::RenderBoy()
+	: BApplication(kRenderAppSignature)
 {
 }
 
 
-Tranquility::~Tranquility()
+RenderBoy::~RenderBoy()
 {
 }
 
 
 void
-Tranquility::AboutRequested()
+RenderBoy::ReadyToRun()
 {
-	BAlert* alert = new BAlert("About Tranquility",
-		"Tranquility Web Browser\n\nby Ryan Leavengood", "Sweet!");
+	BAlert* alert = new BAlert("Hello!",
+		"This is RenderBoy!", "That's Nice");
 	alert->Go();
+	PostMessage(B_QUIT_REQUESTED);
 }
 
 
 void
-Tranquility::ReadyToRun()
-{
-	BrowserWindow *win = new BrowserWindow();
-	win->Show();
-}
-
-
-void
-Tranquility::MessageReceived(BMessage *message)
+RenderBoy::MessageReceived(BMessage *message)
 {
 	switch (message->what) {
 		default:
@@ -58,7 +47,7 @@ Tranquility::MessageReceived(BMessage *message)
 
 
 bool
-Tranquility::QuitRequested()
+RenderBoy::QuitRequested()
 {
 	return true;
 }
@@ -70,8 +59,8 @@ Tranquility::QuitRequested()
 int
 main(int, char **)
 {
-	Tranquility browser;
-	browser.Run();
+	RenderBoy renderer;
+	renderer.Run();
 	return 0;
 }
 

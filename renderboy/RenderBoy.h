@@ -7,21 +7,18 @@
 //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#ifndef TRANQUILITY_H
-#define TRANQUILITY_H
+#ifndef RENDER_BOY_H
+#define RENDER_BOY_H
 
 
 #include <Application.h>
 
-#include <stdio.h>
 
-
-class Tranquility : public BApplication {
+class RenderBoy : public BApplication {
 	public:
-		Tranquility();
-		~Tranquility();
+		RenderBoy();
+		~RenderBoy();
 
-		void AboutRequested();
 		void MessageReceived(BMessage *message);
 		void ReadyToRun();
 		bool QuitRequested();
@@ -29,8 +26,5 @@ class Tranquility : public BApplication {
 };
 
 
-//#define my_app dynamic_cast<Tranquility*>(be_app)
-
-
-#endif	// TRANQUILITY_H
+#endif	// RENDER_BOY_H
 

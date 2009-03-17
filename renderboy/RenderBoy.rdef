@@ -1,0 +1,17 @@
+
+resource(1, "BEOS:APP_SIG") #'MIMS' "application/x-vnd.RJL-RenderBoy";
+
+resource app_version {
+	major  = 1,
+	middle = 0,
+	minor  = 0,
+
+	variety = B_APPV_BETA,
+	internal = 1,
+
+	short_info = "RenderBoy",
+	long_info = "RenderBoy ©2009 Ryan Leavengood"
+};
+
+resource app_flags B_MULTIPLE_LAUNCH | B_BACKGROUND_APP;
+
