@@ -1,0 +1,17 @@
+
+resource(1, "BEOS:APP_SIG") #'MIMS' "application/x-vnd.RJL-Tranquility";
+
+resource app_version {
+	major  = 1,
+	middle = 0,
+	minor  = 0,
+
+	variety = B_APPV_BETA,
+	internal = 1,
+
+	short_info = "Tranquility",
+	long_info = "Tranquility ©2009 Ryan Leavengood"
+};
+
+resource app_flags B_SINGLE_LAUNCH;
+

@@ -1,0 +1,10 @@
+SubDir HAIKU_TOP 3rdparty tranquility ;
+
+Application Tranquility :
+	BrowserWindow.cpp
+	ProxyView.cpp
+	Tranquility.cpp
+
+	: be 
+	: Tranquility.rdef
+	;

@@ -1,0 +1,44 @@
+Initial Prototype
+=================
+
+Date: March 16, 2009
+
+A first test of rendering views and handling messages in another process.
+
+Architecture:
+-------------
+
+Main Process:
+
+Tranquility : BApplication
+BrowserWindow : BWindow, just one to start
+
+ProxyView : BView, one taking up all the frame of the BrowserWindow, draws the BBitmap rendered in the render process, forwards needed BMessages to the render process. This view is simply a canvas that the render process will draw on.
+
+Render Process:
+
+RenderBoy : BApplication
+RenderLooper : BLooper, receives messages from the main process and sends them to RenderView. Embeds the RenderView into a BBitmap, sends the bitmap to the main process.
+RenderView : draws and handle events.
+
+
+Ideas
+-----
+
+-----
+From http://news.ycombinator.com/item?id=518449:
+
+5 points by andreyf 3 hours ago | link
+
+I'm actually moving away from what you describe - a little less than a year ago, I had just finished school, my wife had a baby, and I started a demanding coding job at a startup. For about 6 months, I couldn't code outside of work for my life - I'd doze off to news.yc, RSS feed, even reddit at times.
+
+In those 6 months, though, two ideas have been snowballing - (1) that (Greasemonkey) + (code repository with dependency resolution) + (some other stuff) would be a revolutionary piece of software, and (2) that the great thing about Lisp is vaguely similar to "Dependency Injection" and "Inversion of Control" - macros (reader and otherwise) are dependencies which are injected into the reader and compiler. If I was to figure out an elegant way of doing this in JS, I can piggyback on the buzz of DI and IoC to help people think deeper about programming.
+
+Couple that with the frustration of "people don't get it unless you show them code", and I've been spending more and more nights coding away again. So my recommendation would be:
+
+1) Get excited about something
+
+2) Realize that you're very fortunate to have the resources to be excited about something 99% of the world does not
+
+3) Socially commit by telling people about it (even if they don't get it)
+-----
