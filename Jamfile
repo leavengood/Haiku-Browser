@@ -19,3 +19,4 @@ Application RenderBoy :
 	: RenderBoy.rdef
 	;
 
+AddFilesToHaikuImage home config bin : Tranquility RenderBoy ;
