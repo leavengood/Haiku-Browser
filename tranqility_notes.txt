@@ -22,12 +22,17 @@ RenderLooper : BLooper, receives messages from the main process and sends them t
 RenderView : draws and handle events.
 
 
+Date: May 16, 2009
+
+It has been two months and I finally have a somewhat working version of the above, minus major event handling and there is no RenderLooper yet. It may not be needed.
+
+
 
 Ideas
 =====
 
 From http://news.ycombinator.com/item?id=518449:
--------
+QUOTE>>
 
 5 points by andreyf 3 hours ago | link
 
@@ -42,6 +47,15 @@ Couple that with the frustration of "people don't get it unless you show them co
 2) Realize that you're very fortunate to have the resources to be excited about something 99% of the world does not
 
 3) Socially commit by telling people about it (even if they don't get it)
--------
+
+>>ENDQUOTE
 
 The idea I like is the Greasemonkey idea. This could in some ways be used to replace many Firefox add-ons.
+
+-------
+The Chrome extension API proposal is also interesting: http://dev.chromium.org/developers/design-documents/extensions
+
+-------
+DNS prefetching seems like a good idea: http://dev.chromium.org/developers/design-documents/dns-prefetching
+It depends on how Haiku handles DNS resolution and whether or not there is a DNS cache.
+-------

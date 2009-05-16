@@ -7,22 +7,13 @@
 //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#ifndef PROXY_VIEW_H
-#define PROXY_VIEW_H
+#ifndef APP_SIGNATURES_H
+#define APP_SIGNATURES_H
 
 
-#include <View.h>
+const static char *kBrowserAppSignature = "application/x-vnd.RJL-Tranquility";
+const static char *kRenderAppSignature = "application/x-vnd.RJL-RenderBoy";
 
 
-class ProxyView : public BView {
-	public:
-		ProxyView(BRect frame, const char *name);
-		~ProxyView();
-
-		void Draw(BRect updateRect);
-		void FrameResized(float width, float height);
-		void MouseDown(BPoint point);
-};
-
-#endif	// PROXY_VIEW_H
+#endif	// APP_SIGNATURES_H
 

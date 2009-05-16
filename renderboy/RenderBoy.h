@@ -12,6 +12,13 @@
 
 
 #include <Application.h>
+#include <Bitmap.h>
+#include <Messenger.h>
+#include <Rect.h>
+#include <Window.h>
+#include <View.h>
+
+#include "RenderView.h"
 
 
 class RenderBoy : public BApplication {
@@ -19,10 +26,21 @@ class RenderBoy : public BApplication {
 		RenderBoy();
 		~RenderBoy();
 
-		void MessageReceived(BMessage *message);
 		void ReadyToRun();
+		void MessageReceived(BMessage *message);
+		void Pulse();
 		bool QuitRequested();
-//  private:
+  private:
+		bool _PrepareRenderMessage(BMessage *message);
+
+		bool fStartMsgReceived;
+		BMessenger *fMessenger;
+		BRect fRenderFrame;
+		BBitmap *fRenderBitmap;
+		RenderView *fRenderView;
+
+		BWindow *fDebugWindow;
+		BView *fDebugView;
 };
 
 

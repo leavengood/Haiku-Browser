@@ -13,6 +13,7 @@
 
 #include <Window.h>
 
+#include "ProxyView.h"
 
 class BrowserWindow : public BWindow {
 	public:
@@ -21,6 +22,11 @@ class BrowserWindow : public BWindow {
 
 		void MessageReceived(BMessage *message);
 		bool QuitRequested();
+
+		void SetViewBitmap(BBitmap *bitmap);
+
+	private:
+		ProxyView *fProxyView;
 };
 
 #endif	// BROWSER_WINDOW_H

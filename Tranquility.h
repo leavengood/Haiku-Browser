@@ -12,8 +12,11 @@
 
 
 #include <Application.h>
+#include <Messenger.h>
 
 #include <stdio.h>
+
+#include "BrowserWindow.h"
 
 
 class Tranquility : public BApplication {
@@ -25,7 +28,9 @@ class Tranquility : public BApplication {
 		void MessageReceived(BMessage *message);
 		void ReadyToRun();
 		bool QuitRequested();
-//  private:
+  private:
+		BMessenger *fMessenger;
+		BrowserWindow *fBrowserWindow;
 };
 
 

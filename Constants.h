@@ -10,11 +10,14 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-// App signatures
-extern const char *kBrowserAppSignature = "application/x-vnd.RJL-Tranquility";
-extern const char *kRenderAppSignature = "application/x-vnd.RJL-RenderBoy";
 
 // Message constants
+const static uint32 kMsgStartRenderApp = 'strt';
+	// Used as the message constant to a message sent when launching the render
+	// process, so it can be differentiated from an accidental user launch.
+
+const static uint32 kMsgUpdate = 'updt';
+const static uint32 kMsgBitmapData = 'bmdt';
 
 
 #endif	// CONSTANTS_H

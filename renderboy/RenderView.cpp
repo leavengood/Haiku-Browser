@@ -19,8 +19,8 @@ RenderView::RenderView(BRect frame, const char *name)
 	  fClickPoint(NULL)
 {
 	SetViewColor(255, 255, 255);
-	SetHighColor(0, 0, 0);
-	SetFontSize(18);
+	SetLowColor(255, 255, 255);
+	SetHighColor(240, 67, 67);
 }
 
 
@@ -32,13 +32,29 @@ RenderView::~RenderView()
 void
 RenderView::Draw(BRect updateRect)
 {
+	static int count = 0;
+
+	BRect frame = Frame();
+	// Erase previous drawing (this is the lazy and slow way)
+	FillRect(frame, B_SOLID_LOW);
+
+	frame.InsetBy(50, 50);
+	StrokeEllipse(frame);
+	
 	MovePenTo(25, 25);
-	DrawString("Hello from RenderBoy!");
-	if (fClickPoint) {
-		char string[50];
-		sprintf(string, " You clicked at (%.0f, %.0f)", fClickPoint->x, fClickPoint->y);
-		DrawString(string);
-	}
+	rgb_color color = HighColor();
+	char str[100];
+	sprintf(str, "Hello from RenderBoy! Count is %d, high color is RGB(%d, %d, %d)",
+		count, color.red, color.green, color.blue);
+	DrawString(str);
+
+	// Change the color for next Draw call
+	color.red += 3;
+	color.green += 3;
+	color.blue += 3;
+	SetHighColor(color);
+
+	count++;
 }
 
 
@@ -51,7 +67,5 @@ RenderView::FrameResized(float width, float height)
 void
 RenderView::MouseDown(BPoint point)
 {
-	fClickPoint = new BPoint(point);
-	Invalidate();
 }
 
