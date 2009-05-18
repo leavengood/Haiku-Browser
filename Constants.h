@@ -18,6 +18,7 @@ const static uint32 kMsgStartRenderApp = 'strt';
 
 const static uint32 kMsgUpdate = 'updt';
 const static uint32 kMsgBitmapData = 'bmdt';
+const static uint32 kMsgForward = 'frwd';
 
 
 #endif	// CONSTANTS_H

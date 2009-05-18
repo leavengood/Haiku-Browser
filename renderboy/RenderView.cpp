@@ -12,6 +12,7 @@
 #include <String.h>
 
 #include <stdio.h>
+#include <syslog.h>
 
 
 RenderView::RenderView(BRect frame, const char *name)
@@ -67,5 +68,8 @@ RenderView::FrameResized(float width, float height)
 void
 RenderView::MouseDown(BPoint point)
 {
+	char str[100];
+	sprintf(str, "RenderBoy, RenderView: received MouseDown message at (%.0f, %.0f)", point.x, point.y);
+	syslog(LOG_DEBUG, str);
 }
 

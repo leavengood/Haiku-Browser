@@ -100,6 +100,31 @@ RenderBoy::MessageReceived(BMessage *message)
 			break;
 		}
 
+		case kMsgForward:
+		{
+			syslog(LOG_DEBUG, "RenderBoy: received kMsgForward message");
+			BMessage original;
+			if (message->FindMessage("original", &original) == B_OK) {
+				syslog(LOG_DEBUG, "RenderBoy: found original message from kMsgForward");
+
+				if (fRenderBitmap && fRenderBitmap->Lock()) {
+					syslog(LOG_DEBUG, "RenderBoy: sending message to the render view");
+					switch (original.what) {
+						case B_MOUSE_DOWN:
+						{
+							BPoint where;
+							original.FindPoint("be:view_where", &where);
+							fRenderView->MouseDown(where);
+
+							break;
+						}
+					}
+					fRenderBitmap->Unlock();
+				}
+			}
+			break;
+		}
+
 		default:
 			BApplication::MessageReceived(message);
 			break;

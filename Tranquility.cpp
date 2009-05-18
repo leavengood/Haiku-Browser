@@ -70,6 +70,7 @@ void
 Tranquility::MessageReceived(BMessage *message)
 {
 	switch (message->what) {
+		case kMsgForward:
 		case kMsgUpdate:
 		{
 			if (fMessenger)
