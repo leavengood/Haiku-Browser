@@ -22,8 +22,10 @@ class RenderView : public BView {
 		void Draw(BRect updateRect);
 		void FrameResized(float width, float height);
 		void MouseDown(BPoint point);
+		void MouseMoved(BPoint point, uint32 transit, const BMessage* message);
 	private:
-		BPoint *fClickPoint;
+		BRect fHoverRect;
+		bool fInHoverArea;
 };
 
 #endif	// RENDER_VIEW_H

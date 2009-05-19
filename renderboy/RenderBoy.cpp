@@ -118,6 +118,21 @@ RenderBoy::MessageReceived(BMessage *message)
 
 							break;
 						}
+						case B_MOUSE_MOVED:
+						{
+							// TODO: The BWindow code which processes mouse moved messages does
+							// a lot more than this to eliminate redundant messages. It might
+							// be better to forward from the ProxyView::MouseMoved instead of
+							// using a message filter...
+							BPoint where;
+							original.FindPoint("be:view_where", &where);
+							uint32 transit;
+							original.FindInt32("be:transit", (int32*)&transit);
+							// Ignore the drag message for now
+							fRenderView->MouseMoved(where, transit, NULL);
+
+							break;
+						}
 					}
 					fRenderBitmap->Unlock();
 				}
