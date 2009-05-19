@@ -34,10 +34,10 @@ ProxyFilter::Filter(BMessage* message, BHandler** target)
 	switch (message->what) {
 		// Forward all standard messages to the render process
 		case B_MOUSE_DOWN:
-		/*case B_MOUSE_UP:
-		case B_MOUSE_MOVE:
-		case B_KEY_DOWN:
-		case B_KEY_UP:*/
+		//case B_MOUSE_UP:
+		case B_MOUSE_MOVED:
+		//case B_KEY_DOWN:
+		//case B_KEY_UP:
 		{
 			syslog(LOG_DEBUG, "Tranquility, ProxyFilter: received mouse down message, forwarding it to be_app");
 			BMessage forward(kMsgForward);

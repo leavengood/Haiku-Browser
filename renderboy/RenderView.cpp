@@ -17,7 +17,8 @@
 
 RenderView::RenderView(BRect frame, const char *name)
 	: BView(frame, name, B_FOLLOW_ALL_SIDES, B_WILL_DRAW|B_FRAME_EVENTS),
-	  fClickPoint(NULL)
+	  fHoverRect(200, 200, 300, 300),
+	  fInHoverArea(false)
 {
 	SetViewColor(255, 255, 255);
 	SetLowColor(255, 255, 255);
@@ -41,6 +42,11 @@ RenderView::Draw(BRect updateRect)
 
 	frame.InsetBy(50, 50);
 	StrokeEllipse(frame);
+
+	if (fInHoverArea)
+		FillRect(fHoverRect);
+	else
+		StrokeRect(fHoverRect);
 	
 	MovePenTo(25, 25);
 	rgb_color color = HighColor();
@@ -71,5 +77,12 @@ RenderView::MouseDown(BPoint point)
 	char str[100];
 	sprintf(str, "RenderBoy, RenderView: received MouseDown message at (%.0f, %.0f)", point.x, point.y);
 	syslog(LOG_DEBUG, str);
+}
+
+
+void
+RenderView::MouseMoved(BPoint point, uint32 transit, const BMessage* message)
+{
+	fInHoverArea = fHoverRect.Contains(point);
 }
 
