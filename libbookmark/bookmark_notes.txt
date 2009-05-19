@@ -1,0 +1,36 @@
+Bookmarks Manager
+=================
+
+Date: 2009-05-19
+
+A first design of a bookmark manager.
+
+Architecture:
+-------------
+
+Bookmark:
+
+A simple object with 4 attributes: a title, an url, a parent directory and a favicon. (The last two are optional)
+
+BookmarkManager:
+
+Initialized with an optional BDirectory (the default one should be ~/config/settings/bookmarks).
+
+Have 3 main methods,
+- AddBookmark : Create a BFile from the attributes of a given Bookmark object and store it in the correct directory.
+- GetBookmarkList : Return a BList of Bookmark objects from a given directory. A boolean argument can also be passed to determine whether recursion in sub-folders. This method would be useful to create a bookmark menu or a bookmark bar.
+- ManageBookmarks : Open a Tracker window, in the BDirectory for which the BookmarkManager is set, to manage (reorganize, rename, delete) bookmarks.
+
+
+Ideas:
+------
+
+In the present state the Bookmarks Manager doesn't handle the opening of a bookmark. In the case of opening it from the Tracker it's directly managed by Haiku. In the case of opening it from a bookmark menu (or bar) it would be the browser's job, as GetBookmarkList returns a List of Bookmarks. I am not sure it is the best way to do.
+
+-------
+There is an existing BUrl class that could be used for the url field of the Bookmark class.
+Description from the source code file (/src/kits/support/Url.cpp):
+"Url class for parsing an URL and opening it with its preferred handler."
+As it was mainly written to manage the url mime type, is it really necessary to use it? (instead of a BString)
+
+-------
