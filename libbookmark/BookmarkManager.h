@@ -22,11 +22,11 @@ class BookmarkManager {
 		~BookmarkManager();
 
 		void	AddBookmark(Bookmark *bookmark);
-		BList*	GetBookmarkList(BDirectory *directory, bool recursively = true);
+		BList*	GetBookmarkList(BDirectory *directory, bool recursively = false);
 		void	ManageBookmarks();
 
 	private:
-		BDirectory	*fBookmarksDirectory
+		BDirectory	*fBookmarksDirectory;
 };
 
 #endif // BOOKMARK_MANAGER_H

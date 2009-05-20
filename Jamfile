@@ -19,4 +19,13 @@ Application RenderBoy :
 	: RenderBoy.rdef
 	;
 
+SEARCH_SOURCE += [ FDirName $(HAIKU_TOP) 3rdparty tranquility libbookmark ] ;
+
+SharedLibrary libbookmark.so :
+	Bookmark.cpp
+	BookmarkManager.cpp
+	: be
+	;
+
 AddFilesToHaikuImage home config bin : Tranquility RenderBoy ;
+AddFilesToHaikuImage home config lib : libbookmark.so ;

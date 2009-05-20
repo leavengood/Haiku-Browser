@@ -12,9 +12,9 @@
 #define BOOKMARK_H
 
 
-#include <Bitmap.h>;
-#include <Directory.h>;
-#include <String.h>;
+#include <Bitmap.h>
+#include <Directory.h>
+#include <String.h>
 
 class Bookmark {
 	public:
@@ -26,10 +26,10 @@ class Bookmark {
 		BString*	Url();
 		BDirectory*	ParentDirectory();
 		BBitmap*	Favicon();
-		void		setTitle(BString *title);
-		void		setUrl(BString *url);
-		void		setParentDirectory(BDirectory *parentDirectory);
-		void		setFavicon(BBitmap *favicon);
+		void		SetTitle(BString *title);
+		void		SetUrl(BString *url);
+		void		SetParentDirectory(BDirectory *parentDirectory);
+		void		SetFavicon(BBitmap *favicon);
 
 	private:
 		BString		*fTitle;
