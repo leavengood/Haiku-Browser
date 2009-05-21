@@ -1,5 +1,7 @@
 SubDir HAIKU_TOP 3rdparty tranquility ;
 
+SetConfigVar DEBUG : HAIKU_TOP 3rdparty tranquility : 1 : global ;
+
 Application Tranquility :
 	BrowserWindow.cpp
 	ProxyView.cpp
