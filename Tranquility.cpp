@@ -20,6 +20,10 @@
 
 #include <syslog.h>
 
+#ifdef DEBUG
+#include "LeakTracker.h"
+#endif
+
 Tranquility::Tranquility()
 	: BApplication(kBrowserAppSignature),
 	fMessenger(NULL)
@@ -139,8 +143,14 @@ Tranquility::QuitRequested()
 int
 main(int, char **)
 {
-	Tranquility browser;
-	browser.Run();
+	Tranquility *browser = new Tranquility();
+	browser->Run();
+	delete browser;
+
+#ifdef DEBUG
+	DumpUnfreed();
+#endif
+
 	return 0;
 }
 
