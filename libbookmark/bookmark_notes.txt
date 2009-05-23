@@ -34,3 +34,21 @@ Description from the source code file (/src/kits/support/Url.cpp):
 As it was mainly written to manage the url mime type, is it really necessary to use it? (instead of a BString)
 
 -------
+
+
+How NetPositive bookmarks work:
+-------------------------------
+
+NetPositive maintains its bookmarks in a folder (/boot/home/config/settings/NetPositive/Bookmarks) as special bookmark files with a URL, Title and Keyword attribute. The file name is the same as the title, unless there is duplicate bookmarks added in which a number is added to the filename after a space (Google, Google 1, Google 2, etc.) The Keyword attribute does not appear to be used.
+
+Any folders within the bookmark folder are added as a submenu at the bottom of the Bookmark menu, after a menu separator. The same thing is done with folders within subfolders, however deep.
+
+The Bookmarks menu contains an Add to Bookmarks (Alt-B) command which just adds the bookmark to the bottom of the menu (and the folder) without any dialog or confirmation. There is also a Show Bookmarks command which opens a Tracker window to the bookmarks folder. Then there is a menu separator and then the bookmarks (with their titles as the menu item label.)
+
+When NetPositive is started the bookmarks are loaded in alphabetical order by title. This means that new bookmarks that were added in the last session move from the bottom of the menu to their alphabetical position.
+
+If there is no Title attribute set, the folder name and file name are appended to produce the title used in the menu (separated by forward slashes.) For example a bookmark with filename "Google" under subfolders "Internet" and "Search" would appear in a Search menu under the Internet submenu of the Bookmark menu as "Internet/Search/Google".
+
+If there is no Url attribute set, the bookmark is not added to the menu. Also as may be obvious, any files in the bookmark folder that are not bookmarks are ignored.
+
+-------
