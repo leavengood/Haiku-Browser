@@ -103,7 +103,7 @@ BookmarkManager::GetBookmarkList(BDirectory *directory)
 
 	directory->Rewind();
 
-	while (directory->GetNextEntry(&entry, true) != B_ENTRY_NOT_FOUND) {
+	while (directory->GetNextEntry(&entry, false) != B_ENTRY_NOT_FOUND) {
 		BNode node(&entry);
 		BNodeInfo nodeInfo(&node);
 		char nodeType[B_MIME_TYPE_LENGTH] = { '\0' };
@@ -176,7 +176,7 @@ BookmarkManager::BuildBookmarkMenu(BMenu *menu, BDirectory *directory, bool recu
 		BEntry entry;
 		int32 nbDirectory = 0;
 
-		while (directory->GetNextEntry(&entry, true) != B_ENTRY_NOT_FOUND) {
+		while (directory->GetNextEntry(&entry, false) != B_ENTRY_NOT_FOUND) {
 			if (entry.IsDirectory()) {
 				nbDirectory++;
 
