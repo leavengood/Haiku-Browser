@@ -13,6 +13,7 @@
 
 
 #include <List.h>
+#include <Menu.h>
 
 #include "Bookmark.h"
 
@@ -22,8 +23,10 @@ class BookmarkManager {
 		~BookmarkManager();
 
 		void	AddBookmark(Bookmark *bookmark);
-		BList*	GetBookmarkList(BDirectory *directory, bool recursively = false);
 		void	ManageBookmarks();
+		BList*	GetBookmarkList(BDirectory *directory);
+		void	BuildBookmarkMenu(BMenu *menu, BDirectory *directory = NULL,
+			bool recursively = true);
 
 	private:
 		BDirectory	*fBookmarksDirectory;
