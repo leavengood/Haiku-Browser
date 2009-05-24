@@ -156,8 +156,9 @@ BookmarkManager::BuildBookmarkMenu(BMenu *menu, BDirectory *directory, bool recu
 	BList *bookmarkList = GetBookmarkList(directory);
 	BMenuItem *item;
 
+	Bookmark *bookmark;
 	for (int32 i = 0; i < bookmarkList->CountItems(); i++) {
-		Bookmark *bookmark = static_cast<Bookmark*>(bookmarkList->ItemAt(i));
+		bookmark = static_cast<Bookmark*>(bookmarkList->ItemAt(i));
 
 		BMessage *message = new BMessage(kMsgOpenBookmark);
 		message->AddString("url", bookmark->Url()->String());
@@ -193,4 +194,11 @@ BookmarkManager::BuildBookmarkMenu(BMenu *menu, BDirectory *directory, bool recu
 		if (nbDirectory == 0)
 			menu->RemoveItem(bookmarkList->CountItems());
 	}
+
+	// Free the BList of Bookmarks
+	void *listItem;
+	for (int32 i = 0; listItem = bookmarkList->ItemAt(i); i++)
+		delete listItem;
+
+	delete bookmarkList;
 }
