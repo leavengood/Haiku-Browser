@@ -29,5 +29,21 @@ SharedLibrary libbookmark.so :
 	: be
 	;
 
+# Unit tests
+
+#SEARCH_SOURCE += [ FDirName $(HAIKU_TOP) 3rdparty tranquility libbookmark tests ] ;
+#
+## For the cxxtest headers
+#SubDirSysHdrs [ FDirName $(HAIKU_TOP) 3rdparty tranquility headers ] ;
+#
+#include CxxTestRules ;
+#
+#GenerateCxxTestRunner test_runner.cpp : libbookmark/tests/BookmarkTest.h ;
+#
+#BinCommand test_runner :
+#	test_runner.cpp
+#	: libbookmark.so be $(TARGET_LIBSTDC++)
+#	;
+
 AddFilesToHaikuImage home config bin : Tranquility RenderBoy ;
 AddFilesToHaikuImage home config lib : libbookmark.so ;

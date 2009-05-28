@@ -1,0 +1,29 @@
+# FIXME: This does not work right at all and is only being kept as reference
+#rule GenerateCxxTestRunner runnerName : testFiles
+#{
+#	runnerName = [ FGristFiles $(runnerName) ] ;
+#	testFiles = [ FGristFiles $(testFiles) ] ;
+#
+#	#ECHO $(runnerName) ;
+#	
+#	local runnerDir = [ FDirName $(runnerName:D) ] ;
+#
+#	ECHO $(runnerDir) ;
+#
+#	MakeLocate $(runnerName) : $(runnerDir) ;
+#
+#	SEARCH_SOURCE on $(runnerName) = $(runnerDir) ;
+#
+#	LocalClean clean : $(runnerName) ;
+#	LocalDepends all : $(runnerName) ;
+#	Depends $(runnerName) : $(testFiles) ;
+#
+#	GenerateCxxTestRunner1 $(runnerName) : $(testFiles) ;
+#}
+#
+#CXXTESTGEN = cxxtestgen.pl ;
+#
+#actions GenerateCxxTestRunner1
+#{
+#	$(CXXTESTGEN) -o "$(1)" --error-printer "$(2)"
+#}

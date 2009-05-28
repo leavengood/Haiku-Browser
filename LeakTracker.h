@@ -53,6 +53,16 @@ void RemoveTrack(int addr)
 	}
 };
 
+int unfreedCount()
+{
+	return allocList->size();
+}
+
+bool nothingUnfreed()
+{
+	return allocList->empty();
+}
+
 #include <stdio.h>
 
 void OutputDebugString(char *str)
