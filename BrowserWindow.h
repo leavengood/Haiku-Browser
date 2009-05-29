@@ -10,9 +10,9 @@
 #ifndef BROWSER_WINDOW_H
 #define BROWSER_WINDOW_H
 
-
 #include <Window.h>
 
+#include "BrowserToolbar.h"
 #include "ProxyView.h"
 
 class BrowserWindow : public BWindow {
@@ -26,6 +26,9 @@ class BrowserWindow : public BWindow {
 		void SetViewBitmap(BBitmap *bitmap);
 
 	private:
+		void _BuildToolbar();
+
+		BrowserToolbar *fToolbar;
 		ProxyView *fProxyView;
 };
 

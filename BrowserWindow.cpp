@@ -11,15 +11,25 @@
 #include "ProxyView.h"
 
 #include <Application.h>
+#include <GroupLayout.h>
+#include <GroupLayoutBuilder.h>
 
 #include <stdio.h>
-
 
 BrowserWindow::BrowserWindow()
 	: BWindow(BRect(100, 100, 600, 600), "Tranquility", B_DOCUMENT_WINDOW, 0)
 {
+	fToolbar = new BrowserToolbar();
+
 	fProxyView = new ProxyView(Bounds(), "Proxy");
-	AddChild(fProxyView);
+
+	// Set the layout
+	SetLayout(new BGroupLayout(B_HORIZONTAL));
+
+	AddChild(BGroupLayoutBuilder(B_VERTICAL, 10)
+		.Add(fToolbar)
+		.Add(fProxyView)
+	);
 }
 
 
@@ -55,4 +65,3 @@ BrowserWindow::SetViewBitmap(BBitmap *bitmap)
 		Unlock();
 	}
 }
-

@@ -2,13 +2,16 @@ SubDir HAIKU_TOP 3rdparty tranquility ;
 
 SetConfigVar DEBUG : HAIKU_TOP 3rdparty tranquility : 1 : global ;
 
+UseHeaders [ FDirName $(HAIKU_TOP) 3rdparty libwalter include ] : true ;
+
 Application Tranquility :
+	BrowserToolbar.cpp
 	BrowserWindow.cpp
 	ProxyView.cpp
 	Tranquility.cpp
 
-	: be 
-	: Tranquility.rdef
+	: be translation libwalter.so
+	: Tranquility.rdef pictures.rdef
 	;
 
 SEARCH_SOURCE += [ FDirName $(HAIKU_TOP) 3rdparty tranquility renderboy ] ;
@@ -26,6 +29,7 @@ SEARCH_SOURCE += [ FDirName $(HAIKU_TOP) 3rdparty tranquility libbookmark ] ;
 SharedLibrary libbookmark.so :
 	Bookmark.cpp
 	BookmarkManager.cpp
+
 	: be
 	;
 

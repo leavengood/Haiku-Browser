@@ -19,8 +19,15 @@ const static uint32 kMsgStartRenderApp = 'strt';
 const static uint32 kMsgUpdate = 'updt';
 const static uint32 kMsgBitmapData = 'bmdt';
 const static uint32 kMsgForward = 'frwd';
+
 const static uint32 kMsgManageBookmarks = 'mgbk';
 const static uint32 kMsgOpenBookmark = 'opbk';
+
+const static uint32 kMsgNavBack = 'back';
+const static uint32 kMsgNavForward = 'forw';
+const static uint32 kMsgNavReload = 'relo';
+const static uint32 kMsgNavHome = 'home';
+const static uint32 kMsgNavStop = 'stop';
 
 #endif	// CONSTANTS_H
 
