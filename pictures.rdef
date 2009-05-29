@@ -1,4 +1,4 @@
-resource(0, "back.png") #'BMAP' archive(, 0x00000000) BBitmap {
+resource(0, "back.png") #'TBBM' archive(, 0x00000000) BBitmap {
 	"_frame" = rect { 0.0, 0.0, 27.0, 19.0 },
 	"_cspace" = 4,
 	"_bmflags" = 1,
@@ -25,7 +25,7 @@ resource(0, "back.png") #'BMAP' archive(, 0x00000000) BBitmap {
 	}
 };
 
-resource(1, "forward.png") #'BMAP' archive(, 0x00000000) BBitmap {
+resource(1, "forward.png") #'TBBM' archive(, 0x00000000) BBitmap {
 	"_frame" = rect { 0.0, 0.0, 27.0, 19.0 },
 	"_cspace" = 4,
 	"_bmflags" = 1,
@@ -52,7 +52,7 @@ resource(1, "forward.png") #'BMAP' archive(, 0x00000000) BBitmap {
 	}
 };
 
-resource(2, "reload.png") #'BMAP' archive(, 0x00000000) BBitmap {
+resource(2, "reload.png") #'TBBM' archive(, 0x00000000) BBitmap {
 	"_frame" = rect { 0.0, 0.0, 27.0, 19.0 },
 	"_cspace" = 4,
 	"_bmflags" = 1,
@@ -79,7 +79,7 @@ resource(2, "reload.png") #'BMAP' archive(, 0x00000000) BBitmap {
 	}
 };
 
-resource(3, "home.png") #'BMAP' archive(, 0x00000000) BBitmap {
+resource(3, "home.png") #'TBBM' archive(, 0x00000000) BBitmap {
 	"_frame" = rect { 0.0, 0.0, 27.0, 19.0 },
 	"_cspace" = 4,
 	"_bmflags" = 1,
@@ -106,7 +106,7 @@ resource(3, "home.png") #'BMAP' archive(, 0x00000000) BBitmap {
 	}
 };
 
-resource(4, "stop.png") #'BMAP' archive(, 0x00000000) BBitmap {
+resource(4, "stop.png") #'TBBM' archive(, 0x00000000) BBitmap {
 	"_frame" = rect { 0.0, 0.0, 27.0, 19.0 },
 	"_cspace" = 4,
 	"_bmflags" = 1,
