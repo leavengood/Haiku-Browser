@@ -17,11 +17,16 @@
 #include <NodeInfo.h>
 #include <Path.h>
 
+#include <MenuItem.h>
+
 #include <Roster.h>
 
 #include <stdio.h>
 #include <string.h>
 #include <syslog.h>
+#include <typeinfo>
+
+#include "Constants.h"
 
 BookmarkManager::BookmarkManager(BDirectory *directory)
 {
@@ -76,14 +81,29 @@ BookmarkManager::AddBookmark(Bookmark *bookmark)
 }
 
 
+void
+BookmarkManager::ManageBookmarks()
+{
+	BEntry directoryEntry;
+	entry_ref directory;
+
+	fBookmarksDirectory->GetEntry(&directoryEntry);
+	directoryEntry.GetRef(&directory);
+
+	be_roster->Launch(&directory);
+}
+
+
 BList*
-BookmarkManager::GetBookmarkList(BDirectory *directory, bool recursively)
+BookmarkManager::GetBookmarkList(BDirectory *directory)
 {
 	BEntry entry;
 	Bookmark *bookmark;
 	BList *bookmarkList = new BList(directory->CountEntries());
 
-	while (directory->GetNextEntry(&entry, true) != B_ENTRY_NOT_FOUND) {
+	directory->Rewind();
+
+	while (directory->GetNextEntry(&entry, false) != B_ENTRY_NOT_FOUND) {
 		BNode node(&entry);
 		BNodeInfo nodeInfo(&node);
 		char nodeType[B_MIME_TYPE_LENGTH] = { '\0' };
@@ -115,13 +135,11 @@ BookmarkManager::GetBookmarkList(BDirectory *directory, bool recursively)
 			char titleAttr[attrLength];
 			file.ReadAttr("Title", B_STRING_TYPE, 0, titleAttr, attrLength);
 
-			// TODO: Do the same for the favicon, depending on how it will be implemente.
+			// TODO: Do the same for the favicon, depending on how it will be implemented.
 
 			bookmark = new Bookmark(new BString(titleAttr),
 				new BString(urlAttr), directory);
 			bookmarkList->AddItem(bookmark);
-		} else if (recursively && entry.IsDirectory()) {
-			bookmarkList->AddList(GetBookmarkList(new BDirectory(&entry), true));
 		}
 	}
 
@@ -130,13 +148,57 @@ BookmarkManager::GetBookmarkList(BDirectory *directory, bool recursively)
 
 
 void
-BookmarkManager::ManageBookmarks()
+BookmarkManager::BuildBookmarkMenu(BMenu *menu, BDirectory *directory, bool recursively)
 {
-	BEntry directoryEntry;
-	entry_ref directory;
+	if (directory == NULL)
+		directory = fBookmarksDirectory;
 
-	fBookmarksDirectory->GetEntry(&directoryEntry);
-	directoryEntry.GetRef(&directory);
+	BList *bookmarkList = GetBookmarkList(directory);
+	BMenuItem *item;
 
-	be_roster->Launch(&directory);
+	Bookmark *bookmark;
+	for (int32 i = 0; i < bookmarkList->CountItems(); i++) {
+		bookmark = static_cast<Bookmark*>(bookmarkList->ItemAt(i));
+
+		BMessage *message = new BMessage(kMsgOpenBookmark);
+		message->AddString("url", bookmark->Url()->String());
+
+		item = new BMenuItem(bookmark->Title()->String(), message);
+		menu->AddItem(item);
+	}
+
+	if (recursively) {
+		// No bookmark no separator
+		if (bookmarkList->CountItems() > 0)
+			menu->AddSeparatorItem();
+
+		directory->Rewind();
+
+		BEntry entry;
+		int32 nbDirectory = 0;
+
+		while (directory->GetNextEntry(&entry, false) != B_ENTRY_NOT_FOUND) {
+			if (entry.IsDirectory()) {
+				nbDirectory++;
+
+				char name[B_FILE_NAME_LENGTH];
+				entry.GetName(name);
+
+				BMenu *submenu = new BMenu(name);
+				BuildBookmarkMenu(submenu, new BDirectory(&entry), true);
+				menu->AddItem(submenu);
+			}
+		}
+
+		// No sub-directory no separator
+		if (nbDirectory == 0)
+			menu->RemoveItem(bookmarkList->CountItems());
+	}
+
+	// Free the BList of Bookmarks
+	void *listItem;
+	for (int32 i = 0; listItem = bookmarkList->ItemAt(i); i++)
+		delete listItem;
+
+	delete bookmarkList;
 }
