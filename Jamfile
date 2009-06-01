@@ -3,6 +3,7 @@ SubDir HAIKU_TOP 3rdparty tranquility ;
 SetConfigVar DEBUG : HAIKU_TOP 3rdparty tranquility : 1 : global ;
 
 UseHeaders [ FDirName $(HAIKU_TOP) 3rdparty libwalter include ] : true ;
+UseLibraryHeaders icon ;
 
 Application Tranquility :
 	BrowserToolbar.cpp
@@ -10,7 +11,7 @@ Application Tranquility :
 	ProxyView.cpp
 	Tranquility.cpp
 
-	: be translation libwalter.so
+	: be translation libicon.a libwalter.so
 	: Tranquility.rdef pictures.rdef
 	;
 
