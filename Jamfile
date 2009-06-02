@@ -9,6 +9,7 @@ Application Tranquility :
 	BrowserToolbar.cpp
 	BrowserWindow.cpp
 	ProxyView.cpp
+	Tab.cpp
 	TabBar.cpp
 	Tranquility.cpp
 
