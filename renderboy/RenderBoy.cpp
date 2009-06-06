@@ -13,6 +13,8 @@
 #include "Constants.h"
 
 #include <Alert.h>
+#include <Roster.h>
+#include <String.h>
 
 #include <stdio.h>
 #include <syslog.h>
@@ -48,6 +50,10 @@ RenderBoy::ReadyToRun()
 		fRenderBitmap = new BBitmap(fRenderFrame, B_RGB32, true);
 		fRenderView = new RenderView(fRenderFrame, "Render View");
 		fRenderBitmap->AddChild(fRenderView);
+
+		// Watch for app closes to see if the main process quits
+		be_roster->StartWatching(be_app_messenger, B_REQUEST_QUIT);
+
 		fDebugView = new BView(fRenderFrame, "Debug View", B_FOLLOW_ALL_SIDES, 0);
 		BRect debugFrame(fRenderFrame);
 		debugFrame.OffsetBy(300, 300);
@@ -140,6 +146,18 @@ RenderBoy::MessageReceived(BMessage *message)
 			break;
 		}
 
+		case B_SOME_APP_QUIT:
+		{
+			BString sig;
+			if (message->FindString("be:signature", &sig) == B_OK) {
+				if (sig.Compare(kBrowserAppSignature) == 0) {
+					syslog(LOG_DEBUG, "RenderBoy: browser application has quit, sending B_QUIT_REQUESTED to self.");
+					be_app->PostMessage(B_QUIT_REQUESTED);
+				}
+			}
+			break;
+		}
+
 		default:
 			BApplication::MessageReceived(message);
 			break;
@@ -159,6 +177,7 @@ RenderBoy::Pulse()
 bool
 RenderBoy::QuitRequested()
 {
+	be_roster->StopWatching(be_app_messenger);
 	syslog(LOG_DEBUG, "RenderBoy: received B_QUIT_REQUESTED message, quitting.");
 	return true;
 }
